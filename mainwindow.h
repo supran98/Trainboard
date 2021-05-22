@@ -15,6 +15,7 @@ namespace Ui {
 class MainWindow;
 }
 class HL;
+class Filter;
 
 class MainWindow : public QMainWindow
 {
@@ -26,7 +27,6 @@ public:
 
     unsigned short getSpeed() const;
     float getAccuracy() const;
-
 private:
     Ui::MainWindow *ui;
 
@@ -40,7 +40,8 @@ private:
     QTimer*        label_timer;
     QTime          input_time;
     QList<int>     modifiers;
-    HL*           gb_collector;
+    Filter*        filter;
+    HL*            highlighter;
 private slots:
     void onInpFinished();
     void keyHandle(int code);
@@ -49,7 +50,6 @@ public slots:
     void InsertText();
     void MoveCursor();
     void ShowShortcutInfo();
-
 signals:
     void sig_text_size(int size);
     void input_finished();
@@ -70,12 +70,13 @@ signals:
 class HL : public QSyntaxHighlighter
 {
 public:
+    HL(QObject *parent=0);
     HL(int size, QObject *parent=0);
     ~HL();
 protected:
     void highlightBlock(const QString &text);
 private:
-    int text_size;
+    int highlighted_chars;
 };
 
 class RandomTextLoader : public QObject

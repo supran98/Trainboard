@@ -36,7 +36,12 @@ bool Filter::eventFilter(QObject *watched, QEvent *event)
     return false;
 }
 
-HL::HL(int size, QObject *parent) : QSyntaxHighlighter(parent), text_size(size)
+HL::HL(QObject *parent) : QSyntaxHighlighter(parent)
+{
+
+}
+
+HL::HL(int size, QObject *parent) : QSyntaxHighlighter(parent), highlighted_chars(size)
 {
 
 }
@@ -50,18 +55,10 @@ void HL::highlightBlock(const QString &text)
 {
     Q_UNUSED(text)
 
-    static int pos = 1;
     QTextCharFormat format;
     format.setBackground(Qt::yellow);
 
-    if (pos > text_size-1)
-    {
-        pos = 1;
-        setFormat(0, 0, format);
-        return ;
-    }
-
-    setFormat(0, pos++, format);
+    setFormat(0, highlighted_chars, format);
 }
 
 RandomTextLoader::RandomTextLoader(QObject *parent) : QObject(parent)

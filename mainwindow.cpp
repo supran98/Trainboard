@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->textEdit->setAttribute(Qt::WA_TransparentForMouseEvents);
     ui->textEdit->setPlainText(full_text);
-    Filter *filter = new Filter(ui->textEdit);
+    filter = new Filter(ui->textEdit);
     ui->textEdit->installEventFilter(filter);
     label_timer = new QTimer();
 
@@ -36,6 +36,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete label_timer;
+    delete filter;
 }
 
 float MainWindow::getAccuracy() const
@@ -71,9 +72,11 @@ void MainWindow::keyHandle(int code)
 
     if (code == full_text[chars_entered])
     {
-        gb_collector = new HL(full_text.size(), ui->textEdit);
-        //*gb_collector++;
+        if(chars_entered > 0)
+            delete highlighter;
         chars_entered++;
+        highlighter = new HL(chars_entered, ui->textEdit);
+
     }
     else
         mistakes++;
@@ -88,10 +91,10 @@ void MainWindow::keyHandle(int code)
 void MainWindow::onInpFinished()
 {
     input_is_active = false;
+    if (chars_entered)
+        delete highlighter;
     mistakes = 0;
     chars_entered = 0;
-    new HL(0, ui->textEdit);
-    //delete gb_collector;
 }
 
 void MainWindow::timerUpd()
@@ -133,25 +136,14 @@ void MainWindow::InsertText()
 
 void MainWindow::MoveCursor()
 {
-    static int counter = 0;
     QTextCursor cursor = ui->textEdit->textCursor();
 
     if (!input_is_active)
-    {
-        counter = 0;
         cursor.setPosition(0);
-    }
     else
-        cursor.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor, 1);
-
-    if (counter == full_text.size())
-    {
-        counter = 0;
-        cursor.setPosition(0);
-    }
+        cursor.setPosition(chars_entered);
 
     ui->textEdit->setTextCursor(cursor);
-    counter++;
 }
 
 void MainWindow::ShowShortcutInfo()
