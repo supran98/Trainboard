@@ -40,7 +40,6 @@ private:
     QTimer*        label_timer;
     QTime          input_time;
     QList<int>     modifiers;
-    HL*           gb_collector;
 private slots:
     void onInpFinished();
     void keyHandle(int code);

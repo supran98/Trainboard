@@ -72,7 +72,6 @@ void MainWindow::keyHandle(int code)
     if (code == full_text[chars_entered])
     {
         gb_collector = new HL(full_text.size(), ui->textEdit);
-        //*gb_collector++;
         chars_entered++;
     }
     else
@@ -91,7 +90,6 @@ void MainWindow::onInpFinished()
     mistakes = 0;
     chars_entered = 0;
     new HL(0, ui->textEdit);
-    //delete gb_collector;
 }
 
 void MainWindow::timerUpd()

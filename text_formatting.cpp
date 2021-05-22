@@ -19,18 +19,16 @@ bool Filter::eventFilter(QObject *watched, QEvent *event)
     if (event->type() == QEvent::KeyPress)
     {
         if (static_cast<QKeyEvent*>(event)->modifiers() & Qt::ShiftModifier)
-        {
             emit sig_key_code(key);
 
-        }
+        else if (key == 1025) // "ё"-handling
+            emit sig_key_code(1105);
+
         else if ((key >= 65 && key <= 90) || (key >= 1040 && key <= 1071))
-        {
             emit sig_key_code(key + 32);
-        }
+
         else
-        {
             emit sig_key_code(key);
-        }
 
         return true;
     }
@@ -119,7 +117,7 @@ QString RandomTextLoader::SimplifyChars(QString &text)
         if (text[pos] == 0xAB || text[pos] == 0xBB) // ordinary quotes instead of angle quotes
             text[pos] = '\"';
 
-        if (text[pos].category() == 20)
+        if (text[pos].category() == QChar::Punctuation_Dash)
             text[pos] = '-';
     }
 
