@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->textEdit->installEventFilter(filter);
     label_timer = new QTimer();
 
-    connect(filter,             SIGNAL(sig_key_code(int)), this, SLOT(keyHandle(int)));
+    connect(filter,             SIGNAL(sig_key_code(int)), this, SLOT(HandleKey(int)));
     connect(ui->restart_button, SIGNAL(clicked(bool)), SIGNAL(input_finished()));
     connect(ui->restart_button, SIGNAL(clicked(bool)), ui->textEdit, SLOT(setFocus()));
     connect(ui->restart_button, SIGNAL(clicked(bool)), SLOT(ShowShortcutInfo()));
@@ -58,7 +58,7 @@ unsigned short MainWindow::getSpeed() const
         return chars_entered / (float)(input_time.elapsed() / 1000.0) * 60;
 }
 
-void MainWindow::keyHandle(int code)
+void MainWindow::HandleKey(int code)
 {
     if (modifiers.contains(code))
         return ;
@@ -111,7 +111,7 @@ void MainWindow::timerUpd()
 
 void MainWindow::InsertText()
 {
-    ui->statusBar->showMessage("\"Ctrl+F", 500);
+    ui->statusBar->showMessage("\"Ctrl+F\"", 500);
     emit input_finished();
 
     if (ui->setEngLayout->isChecked() && !ui->setRusLayout->isChecked())
@@ -148,7 +148,5 @@ void MainWindow::MoveCursor()
 
 void MainWindow::ShowShortcutInfo()
 {
-    ui->statusBar->showMessage("\"Ctrl+A", 500);
+    ui->statusBar->showMessage("\"Ctrl+R\"", 500);
 }
-
-

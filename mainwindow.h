@@ -25,8 +25,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    unsigned short getSpeed() const;
-    float getAccuracy() const;
+    unsigned short getSpeed()    const;
+    float          getAccuracy() const;
 private:
     Ui::MainWindow *ui;
 
@@ -44,14 +44,13 @@ private:
     HL*            highlighter;
 private slots:
     void onInpFinished();
-    void keyHandle(int code);
+    void HandleKey(int code);
+    void MoveCursor();
     void timerUpd();
 public slots:
     void InsertText();
-    void MoveCursor();
     void ShowShortcutInfo();
 signals:
-    void sig_text_size(int size);
     void input_finished();
 };
 

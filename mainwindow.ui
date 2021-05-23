@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>620</width>
-    <height>448</height>
+    <height>452</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>10</x>
       <y>70</y>
       <width>491</width>
-      <height>328</height>
+      <height>329</height>
      </rect>
     </property>
     <property name="font">
@@ -33,7 +33,7 @@
     <property name="geometry">
      <rect>
       <x>520</x>
-      <y>376</y>
+      <y>377</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -42,7 +42,7 @@
      <string>Restart</string>
     </property>
     <property name="shortcut">
-     <string>Ctrl+A</string>
+     <string>Ctrl+R</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -129,7 +129,7 @@
     <string>Russian</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+R</string>
+    <string>Alt+R</string>
    </property>
   </action>
   <action name="setEngLayout">
@@ -140,7 +140,7 @@
     <string>English</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+E</string>
+    <string>Alt+E</string>
    </property>
   </action>
  </widget>
