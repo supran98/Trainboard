@@ -129,7 +129,7 @@
     <string>Russian</string>
    </property>
    <property name="shortcut">
-    <string>Alt+R</string>
+    <string>Alt+1</string>
    </property>
   </action>
   <action name="setEngLayout">
@@ -140,7 +140,7 @@
     <string>English</string>
    </property>
    <property name="shortcut">
-    <string>Alt+E</string>
+    <string>Alt+2</string>
    </property>
   </action>
  </widget>

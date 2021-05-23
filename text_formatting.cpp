@@ -84,7 +84,7 @@ QByteArray RandomTextLoader::loadText(const QString lang)
         {
             out.setDevice(&texts_rus);
             out.setCodec("UTF-8");
-            all_texts = out.readAll().split(QRegExp("@ text \\d")).toVector();
+            all_texts = out.readAll().split(QRegExp("@+! END_OF_THE_TEXT+ !+@")).toVector();
             texts_rus.close();
         }
         else
@@ -96,7 +96,7 @@ QByteArray RandomTextLoader::loadText(const QString lang)
         {
             out.setDevice(&texts_eng);
             out.setCodec("UTF-8");
-            all_texts = out.readAll().split(QRegExp("@ text \\d")).toVector();
+            all_texts = out.readAll().split(QRegExp("@+! END_OF_THE_TEXT+ !+@")).toVector();
             texts_eng.close();
         }
         else
